@@ -1,0 +1,14 @@
+{
+  "modName": "Nuclear Winter",
+  "keybinds": [
+    {
+      "id": "Insulation Toggle",
+      "desc": "Display the Insulation Widget with a rundown of your equipped armor and their insulation values.",
+      "action": {
+        "type": "CallFunction",
+        "form": "Nuclear Winter.esp|1EED",
+        "function": "InsulationToggle"
+      }
+    }
+	]
+}

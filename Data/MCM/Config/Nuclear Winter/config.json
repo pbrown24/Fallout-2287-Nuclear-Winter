@@ -1,0 +1,721 @@
+{
+	"modName": "Nuclear Winter",
+	"displayName": "Fallout 2287: Nuclear Winter",
+	"minMcmVersion": 2,
+	"content": [
+		{
+			"text": "<p align='center'><font size='30'>Fallout 2287: Nuclear Winter</font><BR><font size='20'>v1.0.0</font></p>",
+			"html": true,
+			"type": "text"
+		},
+		{
+			"text": "<p align='center'>by D1v1ne122</p>",
+			"html": true,
+			"type": "text"
+		},
+		{
+			"text": "About",
+			"type": "section"
+		},
+		{
+			"text": "Fallout 2287: Nuclear Winter is a temperature game systems mod aimed at adding gameplay functionality to the variety of winter mods that exist. While playing this mod, you will have to monitor your core body temperature. If your core body temperature drops below thresholds, you will start to incur ailments as a result of hypothermia. Ailments will make it significantly more difficult to survive the cold. Warm food, cozy interiors, and heat sources, are your friends in the fight against the bitter cold.",
+			"type": "text"
+		}
+	],
+	"pages": [
+		{
+			"pageDisplayName": "General Settings",
+			"content": [
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "General metric options, system toggles and mod activation.",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "General Settings",
+					"type": "section"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Mod Activation (def: ON)",
+					"type": "switcher",
+					"help": "Toggle to turn the mod On or Off",
+					"valueOptions": {
+						"sourceType": "GlobalValue",
+						"sourceForm": "Nuclear Winter.esp|DF06"
+					},
+					"action": {
+						"type": "CallFunction",
+						"form": "Nuclear Winter.esp|DF08",
+						"function": "SetActivation",
+						"scriptName": "NuclearWinter:ContextActivation"
+					}
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "[ Reset Helper Messages ]",
+					"type": "button",
+					"help": "Resets all helper messages so they will re-display when the conditions are satisfied.",
+					"action": {
+						"type": "CallFunction",
+						"form": "Nuclear Winter.esp|3D5E",
+						"scriptName": "NuclearWinter:Gear:ResetHelperMessages", 
+						"function": "Reset"
+					}
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Gameplay Systems Toggle (def: ON)",
+					"type": "switcher",
+					"help": "Turn OFF if you want only the Aesthetic portions (breath, snow shader, dripping water, etc...) of the mod.",
+					"valueOptions": {
+						"sourceType": "PropertyValueBool",
+						"sourceForm": "Nuclear Winter.esp|E6C7",
+						"propertyName": "GameplaySystems"
+					},
+					"action": {
+						"type": "CallFunction",
+						"form": "Nuclear Winter.esp|E6C7",
+						"function": "SetGameplaySystem",
+						"params": ["{value}"],
+						"scriptName": "NuclearWinter:Terminals:ToggleGameplaySystem"
+					}
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Food and Beverage System (def: ON)",
+					"type": "switcher",
+					"help": "Toggle to turn the Food and Beverage System On or Off",
+					"valueOptions": {
+						"sourceType": "GlobalValue",
+						"sourceForm": "Nuclear Winter.esp|E6C6"
+					},
+					"action": {
+						"type": "CallFunction",
+						"form": "Nuclear Winter.esp|E6C4",
+						"function": "SetFoodActivation",
+						"scriptName": "NuclearWinter:Terminal:ToggleFoodSystem"
+					}
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Insulation Settings",
+					"type": "section"
+				},
+				{
+					"text": "Insulation Settings",
+					"type": "stepper",
+					"help": "Changes the temperature metric displayed on the HUD widget for core body temperature and ambient temperature.",
+					"valueOptions": {
+						"options": ["Realistic", "Universal"],
+						"sourceType": "PropertyValueInt",
+						"sourceForm": "Nuclear Winter.esp|E6C7",
+						"propertyName": "InsulationSetting"
+					},
+					"action": {
+						"type": "CallFunction",
+						"form": "Nuclear Winter.esp|E6C7",
+						"scriptName": "NuclearWinter:Terminals:ToggleGameplaySystem",
+						"function": "SetInsulationSetting"
+					}
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Metric Settings",
+					"type": "section"
+				},
+				{
+					"text": "Temperature Metric (def: Fahrenheit)",
+					"type": "stepper",
+					"help": "Changes the temperature metric displayed on the HUD widget for core body temperature and ambient temperature.",
+					"valueOptions": {
+						"options": ["Fahrenheit", "Celsius"],
+						"sourceType": "GlobalValue",
+						"sourceForm": "Nuclear Winter.esp|2684"
+					}
+				},
+				{
+					"text": "Wind Speed Metric (def: MPH)",
+					"type": "stepper",
+					"help": "Changes the metric displayed on the HUD widget, MPH or KPH.",
+					"valueOptions": {
+						"options": ["Miles Per Hour(MPH)", "Kilometers Per Hour(KPH)"],
+						"sourceType": "GlobalValue",
+						"sourceForm": "Nuclear Winter.esp|C834"
+					}
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Aesthetic Settings",
+					"type": "section"
+				},
+				{
+					"text": "Weather Shader Toggle (def: ON)",
+					"type": "switcher",
+					"help": "Toggle to turn On or Off the weather shaders (snow/ice) that appear on NPCs and the Player",
+					"valueOptions": {
+						"sourceType": "PropertyValueBool",
+						"sourceForm": "Nuclear Winter.esp|2E24",
+						"propertyName": "WeatherShaderToggle"
+					},
+					"action": {
+						"type": "CallFunction",
+						"form": "Nuclear Winter.esp|2E24",
+						"function": "Toggle",
+						"scriptName": "NuclearWinter:Terminals:ToggleWeatherShaders"
+					}
+				}
+			]
+		},
+		{
+			"pageDisplayName": "Difficulty Settings",
+			"content": [
+				{
+					"text": "Difficulty Settings",
+					"type": "section"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "These settings modifiy temperature calculation.",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Difficulty Scaler (def: 1.0)",
+					"type": "slider",
+					"help": "This adjusts the temperature by a scaler when a weather's temperature is decided (ex. Target temp = -30 * 0.1). Changes will be applied when the next weather occurs.",
+					"valueOptions": {
+						"min": 0.1,
+						"max": 4.0,
+						"step": 0.1,
+						"sourceType": "GlobalValue",
+						"sourceForm": "Nuclear Winter.esp|F9A"
+					}
+				},
+				{
+					"text": "Temperature Preset (def: Nuclear Winter)",
+					"type": "stepper",   
+					"help": "Realistic: attempts to simultate realistic Commonwealth temps in the winter. Nuclear Winter: temps are colder than normal. Changes will be applied when the next weather occurs.",
+					"valueOptions":	{
+						"options": ["Nuclear Winter", "Realistic Winter"],
+						"sourceType": "GlobalValue",
+						"sourceForm": "Nuclear Winter.esp|D76B"
+					}
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Change Maximum Insulation (def: Realistic - 100, Universal - 40)",
+					"type": "slider",
+					"help": "Increase or decrease the maximum achievable Insulation. This setting resets when swapping Insulation Settings.",
+					"valueOptions": {
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"sourceType": "PropertyValueInt",
+						"sourceForm": "Nuclear Winter.esp|E6C7",
+						"propertyName": "MaxInsulation"
+					}
+				},
+				{
+					"text": "[ Set Max Insulation ]",
+					"type": "button",
+					"help": "Sets the max Insulation to the given parameter.",
+					"action": {
+						"type": "CallFunction",
+						"form": "Nuclear Winter.esp|E6C7",
+						"scriptName": "NuclearWinter:Terminals:ToggleGameplaySystem",
+						"function": "SetMaxInsulation"
+					}
+				}
+			]
+		},
+		{
+			"pageDisplayName": "HUD Settings",
+			"content": [
+				{
+					"text": "HUD Settings",
+					"type": "section"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "These settings modifiy HUD Widget properties.",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Temperature Widget Toggle (def: ON)",
+					"type": "switcher",
+					"help": "Toggle to turn the HUD Widget On or Off",
+					"valueOptions": {
+						"sourceType": "PropertyValueBool",
+						"sourceForm": "Nuclear Winter.esp|DF07",
+						"propertyName": "HUDToggle"
+					},
+					"action": {
+						"type": "CallFunction",
+						"form": "Nuclear Winter.esp|DF07",
+						"function": "SetHUDToggle",
+						"params": ["{value}"],
+						"scriptName": "NuclearWinter:GUI:TemperatureWidget"
+					}
+				},
+				{
+					"text": "Temperature X Position (def: 10)",
+					"type": "slider",
+					"help": "",
+					"valueOptions": {
+						"min": 0,
+						"max": 1600,
+						"step": 1,
+						"sourceType": "PropertyValueInt",
+						"sourceForm": "Nuclear Winter.esp|DF07",
+						"propertyName": "X"
+					}
+				},
+				{
+					"text": "Temperature Y Position (def: 10)",
+					"type": "slider",
+					"help": "",
+					"valueOptions":	{
+						"min": 0,
+						"max": 1000,
+						"step": 1,
+						"sourceType": "PropertyValueInt",
+						"sourceForm": "Nuclear Winter.esp|DF07",
+						"propertyName": "Y"
+					}
+				},
+				{
+					"text": "Temperature X Scale (def: 1.0)",
+					"type": "slider",
+					"help": "",
+					"valueOptions":	{
+						"min": 0.1,
+						"max": 4.0,
+						"step": 0.1,
+						"sourceType": "PropertyValueFloat",
+						"sourceForm": "Nuclear Winter.esp|DF07",
+						"propertyName": "ScaleX"
+					}
+				},
+				{
+					"text": "Temperature Y Scale (def: 1.0)",
+					"type": "slider",
+					"help": "",
+					"valueOptions":	{
+						"min": 0.1,
+						"max": 4.0,
+						"step": 0.1,
+						"sourceType": "PropertyValueFloat",
+						"sourceForm": "Nuclear Winter.esp|DF07",
+						"propertyName": "ScaleY"
+					}
+				},
+				{
+					"text": "Temperature HUD Opacity (def: 1.0)",
+					"type": "slider",
+					"help": "",
+					"valueOptions": {
+						"min": 0.1,
+						"max": 1.0,
+						"step": 0.1,
+						"sourceType": "PropertyValueFloat",
+						"sourceForm": "Nuclear Winter.esp|DF07",
+						"propertyName": "OpacityVal"
+					}
+				},
+				{
+					"text": "[ Set Temperature Widget ]",
+					"type": "button",
+					"help": "Sets the the Temperature widget to the given parameters.",
+					"action": {
+						"type": "CallFunction",
+						"form": "Nuclear Winter.esp|DF07",
+						"scriptName": "NuclearWinter:GUI:TemperatureWidget",	
+						"function": "SetWidgetParameters"
+					}
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					  "id": "Insulation Toggle",
+					  "text": "Insulation Toggle Hotkey",
+					  "type": "hotkey",
+					  "help": "Display the Insulation Widget with a rundown of your equipped armor and their insulation values.",
+					  "valueOptions": {
+						"allowModifierKeys": true
+					  }
+				},
+				{
+					"text": "Insulation X Position (def: 10)",
+					"type": "slider",
+					"help": "",
+					"valueOptions": {
+						"min": 0,
+						"max": 1600,
+						"step": 1,
+						"sourceType": "PropertyValueInt",
+						"sourceForm": "Nuclear Winter.esp|1EED",
+						"propertyName": "X"
+					}
+				},
+				{
+					"text": "Insulation Y Position (def: 10)",
+					"type": "slider",
+					"help": "",
+					"valueOptions":	{
+						"min": 0,
+						"max": 1000,
+						"step": 1,
+						"sourceType": "PropertyValueInt",
+						"sourceForm": "Nuclear Winter.esp|1EED",
+						"propertyName": "Y"
+					}
+				},
+				{
+					"text": "Insulation X Scale (def: 1.0)",
+					"type": "slider",
+					"help": "",
+					"valueOptions":	{
+						"min": 0.1,
+						"max": 4.0,
+						"step": 0.1,
+						"sourceType": "PropertyValueFloat",
+						"sourceForm": "Nuclear Winter.esp|1EED",
+						"propertyName": "ScaleX"
+					}
+				},
+				{
+					"text": "Insulation Y Scale (def: 1.0)",
+					"type": "slider",
+					"help": "",
+					"valueOptions":	{
+						"min": 0.1,
+						"max": 4.0,
+						"step": 0.1,
+						"sourceType": "PropertyValueFloat",
+						"sourceForm": "Nuclear Winter.esp|1EED",
+						"propertyName": "ScaleY"
+					}
+				},
+				{
+					"text": "Insulation HUD Opacity (def: 1.0)",
+					"type": "slider",
+					"help": "",
+					"valueOptions": {
+						"min": 0.1,
+						"max": 1.0,
+						"step": 0.1,
+						"sourceType": "PropertyValueFloat",
+						"sourceForm": "Nuclear Winter.esp|1EED",
+						"propertyName": "OpacityVal"
+					}
+				},
+				{
+					"text": "[ Set Insulation Widget ]",
+					"type": "button",
+					"help": "Sets the the Insulation widget to the given parameters.",
+					"action": {
+						"type": "CallFunction",
+						"form": "Nuclear Winter.esp|1EED",
+						"scriptName": "NuclearWinter:GUI:InsulationWidget",						
+						"function": "SetWidgetParameters"
+					}
+				}
+			]
+		},
+		{
+			"pageDisplayName": "Change Armor Insulation",
+			"content": [
+				{
+					"text": "Change Armor",
+					"type": "section"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "This page allows you to change or add a Insulation value from 0(min) - 100(max) for the armor currently equipped at slot[0-28]",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Insulation Value",
+					"type": "slider",
+					"help": "",
+					"valueOptions": {
+						"min": 0,
+						"max": 100,
+						"step": 5,
+						"sourceType": "PropertyValueInt",
+						"sourceForm": "Nuclear Winter.esp|FDB5",
+						"propertyName": "ValueToAdd"
+					}
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Armor Slot to Change",
+					"type": "dropdown",   
+					"help": "Select the slot the armor occupies. For outfits, this is often the Body slot.",
+					"valueOptions":	{
+						"options": ["0 - Hair Top", "1 - Hair Long", "2 - ...", "3 - Body", "4 - ...", "5 - ...", "6 - [U] Torso", "7 - [U] L Arm", "8 - [U] R Arm", "9 - [U] L Leg", "10 - [U] R Leg", "11 - [A] Torso", "12 - [A] L Arm", "13 - [A] R Arm", "14 - [A] L Leg", "15 - [A] R Leg", "16 - Headband", "17 - Eyes", "18 - Beard", "19 - Mouth", "20 - Neck", "21 - Ring", "22 - ...", "23 - ...", "24 - Utility54", "25 - Utility55", "26 - Utility56", "27 - Utility57", "28 - Utility58"],
+						"sourceType": "PropertyValueInt",
+						"sourceForm": "Nuclear Winter.esp|FDB5",
+						"propertyName": "BipedToAdd"
+					}
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "For more information on biped slots visit:",
+					"type": "text"
+				},
+				{
+					"text": "https://wiki.nexusmods.com/index.php/Body_Slots_usage_for_Fallout_4",
+					"type": "text"
+				},
+				{
+					"text": "Slot 30 -> 0, 31 -> 1, etc...",
+					"type": "text"
+				},
+				{
+					"text": "[U] slots should be used by under armors that cover the body part, like Vault suits. [A] slots should be used by 'above-armors' that cover the body part, like Combat Armor.",
+					"type": "text"
+				},
+				{
+					"text": "[ Apply To Single Slot ]",
+					"type": "button",
+					"help": "Sets the chosen Insulation value for the selected armor slot.",
+					"action": {
+						"type": "CallFunction",
+						"form": "Nuclear Winter.esp|FDB5",
+						"scriptName": "NuclearWinter:Gear:ExposureValues", 
+						"function": "ChangeArmor"
+					}
+				},
+				{
+					"text": "[ Apply To All Slots ]",
+					"type": "button",
+					"help": "Sets the chosen Insulation value for All the equipped armor slots.",
+					"action": {
+						"type": "CallFunction",
+						"form": "Nuclear Winter.esp|FDB5",
+						"scriptName": "NuclearWinter:Gear:ExposureValues", 
+						"function": "ChangeAllArmor"
+					}
+				}
+			]
+		},
+		{
+			"pageDisplayName": "Mod Documentation",
+			"content": [
+				{
+					"text": "Mod Documentation",
+					"type": "section"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "This section has documentation on the game systems involved in Nuclear Winter",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Core Temperature",
+					"type": "section"
+				},
+				{
+					"text": "Core Temperature is the internal temperature of the Sole Survivor's body. The core temperature dictates the severity of ailments that occur over time and if low enough, leads to death. There are many factors that go into how the core temperature is affected.",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Wetness",
+					"type": "section"
+				},
+				{
+					"text": "Wetness is a measure of how wet your character is. Standing in water, wading, swimming or sweating increase this. Wetness negatively affects your core temperature and increases your susceptibility to ailments. Wetness will fall over time and quickly disappears when in range of a Heat Source. High wind speeds also increase the rate at which you dry. ",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Wind Speed",
+					"type": "section"
+				},
+				{
+					"text": "Wind speed negatively affects your core temperature and is more intense depending on the weather. Wind speed is used in the calculation for wind chill that then affects your core temperature. Wind speed is reduced significantly when in a fake interior (an interior in the open world) and completely non-existent in interiors. There is an option to switch between MPH and KPH in the MCM menu.",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Ambient Temperature",
+					"type": "section"
+				},
+				{
+					"text": "Ambient Temperature is one of the main components in the calculation of core temperature change over time. It is primarily affected by the weather. More severe weathers will be colder than pleasant ones. An additional factor in the ambient temperature is time of day. The temperature will be colder during the evening and rises during the day. Interiors/fake interiors have a rather significant impact on the ambient temperature. Interiors will be warmer than exteriors especially if they are occupied areas. To change weather temperatures, wind speeds, and allow for snow shaders, there is a tutorial in the optional downloads section. In the MCM menu there are additional options to manipulate the Ambient Temperature to be more or less harsh and display in Fahrenheit or Celsius.",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Warm Locations",
+					"type": "section"
+				},
+				{
+					"text": "Warm Locations are notably warmer than other areas and are currently inhabited by occupants. These areas will generally start to warm you over time, however, it is slower than Heat Sources which will rapidly increase your core temperature. Warm Locations will heat you more quickly relative to your insulation. To add/remove Warm Locations or Heat Sources via FO4edit, there is a tutorial in the optional downloads section. Also feel free to make lists of potential locations and send them to me (almost certain that I missed some).",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Heat Sources",
+					"type": "section"
+				},
+				{
+					"text": "Heat sources are any object that produces a significant amount of heat. This usually pertains to sources of fire. The range of a heat source is indicated by a pulsing fire icon on the HUD. Heat sources will quickly raise your core temperature allowing for recovery. Fadingsignal’s Campsite mod has a compatibility patch and some custom functionality so you can build heat sources on the go.",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Insulation",
+					"type": "section"
+				},
+				{
+					"text": "Insulation is your armors’ ability to maintain heat. Insulation is on a range from 0-100, 100 being totally insulated, 0 being totally unprotected. The insulation value of clothing and armor depends on the material, thickness and coverage of the item. Insulation will dramatically improve core temperature retention. To view your insulation, there is an aid item that is automatically added to your inventory upon mod initialization. Likewise, you may also assign a Hotkey in the MCM menu. If an armor mod is not yet supported, you may add support through a tutorial in the optional downloads section OR use the MCM menu option to Change Armor. Allowing you to manually change the armors’ insulation value. Feel free to send me mod compatibility patches I can add to the downloads section and/or link to.",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Consumables/Helpful Items",
+					"type": "section"
+				},
+				{
+					"text": "There are several items that can give you temporary protection from the cold. Using these will help boost your core temperature or act as utility. Heating effects stack, but only once for each consumable during the duration.",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{	"text": "- Food: Cooked food will temporarily provide a heating bonus that will be added to your core temperatures rate of change. After 20 minutes, or if the food is moved from your inventory, food will become cold and no longer offer heating benefits. Cold food can be re-heated at a cooking station.",
+					"type": "text"
+				},
+				{	"text": "+2.1F         |     +1.167C         over 5 mins",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "- Alcohol: Consuming alcohol provides a short but potent core temperature heating bonus accompanied by an insulation penalty.",
+					"type": "text"
+				},
+				{
+					"text": "+3.15F       |     +1.75C         over 3 mins",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "- Hand Warmers: these packets create an exothermic reaction that provides a potent heating effect over a long duration.",
+					"type": "text"
+				},
+				{
+					"text": "+9F         |    +5.0C            over 15 mins",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "- Blanket: While useless during travel, blankets provide a heating bonus while sleeping.",
+					"type": "text"
+				},
+				{
+					"text": "+1.2F       |     +0.67C       times the # hours slept",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Water: H2O doesn’t provide any inherent benefits to your core temperature but will freeze over time while in below freezing temperatures and thaw outside of them. Water automatically freezes if it is transferred but can be unfrozen at cooking stations.",
+					"type": "text"
+				},
+				{
+					"type": "spacer"
+				},
+				{
+					"text": "Ailments",
+					"type": "section"
+				},
+				{
+					"text": "Ailments are the result of hypothermia over an extended period. The severity of ailments is determined by the stage of hypothermia you are experiencing. More severe ailments require time to recover after returning your core temperature above hypothermic temperatures. Using antibiotics can help some of these ailments recover faster.",
+					"type": "text"
+				},
+				{
+					"text": "Mild Hypothermia  Below 96.0F / 35.6C | Above 89.6F / 32.0C",
+					"type": "text"
+				},
+				{
+					"text": "Moderate Hypothermia  Below 89.6F / 32.0C | Above 84.5F / 29.2C ",
+					"type": "text"
+				},
+				{
+					"text": "Severe Hypothermia  Below 84.5F / 29.2C",
+					"type": "text"
+				}	
+			]
+		}
+	]
+}
